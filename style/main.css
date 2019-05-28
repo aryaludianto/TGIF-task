@@ -1,0 +1,25 @@
+
+
+td {
+  width: auto;
+  height: 10px;
+  border: 1px solid black;
+  padding: 1px;
+  font-size: 20px;
+  text-align: center;
+}
+
+th{
+  width: 170px;
+  height: 10px;
+  border: 1px solid black;
+  padding: 1px;
+  text-align: center;
+  font-weight: 1000;
+}
+
+
+table {
+  margin: auto;
+  margin-top: 10%;
+}
