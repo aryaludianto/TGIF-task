@@ -4855,11 +4855,12 @@ function dispSenat (member) {
   member.forEach(data => {
     let row = document.createElement("tr"), 
       seniorText = data.seniority == 1 && (data.seniority + " year") || (data.seniority + " years"),
-      text = [fullName = document.createTextNode(nameVal(data)), party =  document.createTextNode(data.party),
+      text = [fullName = nameVal(data), party =  document.createTextNode(data.party),
         state = document.createTextNode(data.state), seniority = document.createTextNode(seniorText), 
         votes = document.createTextNode(data.votes_with_party_pct + "%")]
     
       text.forEach(text => {
+        
         let col = document.createElement("td");
         col.appendChild(text);
         return row.appendChild(col)
@@ -4873,12 +4874,18 @@ function dispSenat (member) {
 //name validation---------------------------------
 function nameVal (data) {
   let first_name = data.first_name || '',
-   middle_name = data.middle_name || '', 
-   last_name= data.last_name || '', 
-   full_name = !middle_name && (last_name + " " + first_name) || (last_name + " "+ first_name +" " + middle_name);
-
-  return full_name;
-
+      middle_name = data.middle_name || '', 
+      last_name= data.last_name || '', 
+      full_name = !middle_name && (last_name + " " + first_name) || (last_name + " "+ first_name +" " + middle_name),
+      linkedName = document.createTextNode(full_name),
+      link = document.createElement('a');
+  
+    link.appendChild(linkedName);
+    link.title = full_name;
+    link.href = data.url;
+    link.target = "_blank";
+    
+  return link;
 }
 
 $(document).ready(dispSenat(members));
