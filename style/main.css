@@ -20,7 +20,19 @@
   margin-left: 1%;
 }
 
-#exp{
+.eml a{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+
+#acc , #acc1, #acc2 {
+  border: 0;
+  background-color: white;
+}
+
+.exp{
   text-indent: 3%;
 }
 
