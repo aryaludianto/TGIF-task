@@ -21040,27 +21040,22 @@ function fillParty (data) {
   let rep = document.getElementById("checkRep"),
     dem = document.getElementById("checkDem"),
     ind = document.getElementById("checkInd"),
-    dataDisp;
-   
-    
-    
-    
-    if(!rep.checked && !dem.checked && !ind.checked){
-      dataDisp = data;
-    } else if (rep.checked && dem.checked && ind.checked){
-      dataDisp = data;
-    } else if (!rep.checked) {
-      dataDisp = data.filter(member => member.party != rep.value);
-    } else if (!dem.checked){
-      dataDisp = data.filter(member => member.party != dem.value);
-    } else if (!ind.checked) {
-      dataDisp = data.filter(member => member.party != ind.value);
-    } 
+    dataDisp, tempData=[], tempArr=[rep,dem,ind];
 
-    return dispSenat(dataDisp)
+    if(!rep.checked && !dem.checked && !ind.checked || rep.checked && dem.checked && ind.checked){
+      dataDisp = data;
+    } else if (ind.checked || dem.checked || rep.checked) {
+      tempData = [];
+      data.filter(member => tempArr.forEach(arr => { if(arr.checked){
+      if (member.party === arr.value) tempData.push(member) }}));
+      dataDisp = tempData;
+    }
+    
+    if (dataDisp.length === 0 ) alert("No Data")
+
+   return dispSenat(dataDisp)
 
 }
-
 
 
 

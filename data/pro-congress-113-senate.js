@@ -5171,38 +5171,22 @@ function fillParty (data) {
   let rep = document.getElementById("checkRep"),
     dem = document.getElementById("checkDem"),
     ind = document.getElementById("checkInd"),
-    dataDisp,tempData=[], tempArr=[rep,dem,ind];
+    dataDisp, tempData=[], tempArr=[rep,dem,ind];
 
-    
-    
-    if(!rep.checked && !dem.checked && !ind.checked){
+    if(!rep.checked && !dem.checked && !ind.checked || rep.checked && dem.checked && ind.checked){
       dataDisp = data;
-    } else if (ind.checked) {
-      dataDisp = data.filter(member => member.party === ind.value);
-    } else if (rep.checked) { 
-      dataDisp = data.filter(member => member.party === rep.value);
-    } else if (dem.checked){
-      dataDisp = data.filter(member => member.party === dem.value);
-    } else if (ind.checked ) {
-      dataDisp = data.filter(member => member.party === ind.value);
-    } else if (rep.checked && dem.checked && ind.checked){
-      dataDisp = data;
+    } else if (ind.checked || dem.checked || rep.checked) {
+      tempData = [];
+      data.filter(member => tempArr.forEach(arr => { if(arr.checked){
+      if (member.party === arr.value) tempData.push(member) }}));
+      dataDisp = tempData;
     }
-    //  else if (!rep.checked && dem.checked && ind.checked  ) {
-    //   console.log("dem & ind")
-    //   // dataDisp = data.filter(member => member.party != rep.value);
-    // } else if (!dem.checked && rep.checked && ind.checked){
-    //   console.log("rep & ind")
-    //   // dataDisp = data.filter(member => member.party != dem.value);
-    // } else if (!ind.checked  && rep.checked && dem.checked) {
-    //   console.log("rep & dem")
-    //   // dataDisp = data.filter(member => member.party != ind.value);
-    // } 
+    
+    if (dataDisp.length === 0 ) alert("No Data")
 
    return dispSenat(dataDisp)
 
 }
-
 
 
 
